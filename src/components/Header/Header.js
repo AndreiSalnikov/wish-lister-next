@@ -2,23 +2,27 @@ import React from 'react';
 import Logo from "@/components/Logo/Logo";
 import Link from "next/link";
 import styles from "./Header.module.scss"
+import {useSelector} from "react-redux";
 
 const Header = () => {
-  const user = false;
+  const {user} = useSelector(state => state.user)
   return (
     <header className={styles.header}>
       <Logo/>
       {user &&
-        <div>
-          <Link href={'/lists'}>Списки подарков</Link>
-          <Link href={''}></Link>
-        </div>
+        <nav>
+          <ul className={styles.header__links}>
+            <li><Link className={styles.header__link} href={'/profile'}>Профиль</Link></li>
+            <li><Link className={styles.header__link} href={'/lists'}>Списки подарков</Link></li>
+            <li><Link className={styles.header__link} href={'/lists'}>Забронированные подарки</Link></li>
+          </ul>
+        </nav>
       }
-
-      <div>
-        <Link href='/gift'>Регистрация</Link>
-        <Link href='/gift'>Войти</Link>
-      </div>
+      {!user &&
+        <nav>
+          <Link href='/gift'>Регистрация</Link>
+          <Link href='/gift'>Войти</Link>
+        </nav>}
 
 
       {/*              {user &&

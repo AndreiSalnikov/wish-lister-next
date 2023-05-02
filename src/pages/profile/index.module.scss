@@ -1,0 +1,19 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+
+  &__heading {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  &__email {
+    font-size: 16px;
+    margin-bottom: 0;
+  }
+
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}

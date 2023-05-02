@@ -1,0 +1,64 @@
+.gift {
+  border: 1px solid #000;
+  padding: 1rem;
+}
+
+.reservation {
+  margin-left: 15px;
+  border: none;
+  display: inline-block;
+  background-color: #4caf50;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #388e3c;
+  }
+
+  &:disabled {
+    background-color: #808080;
+    cursor: auto;
+  }
+
+  &_active {
+    background-color: #808080
+  }
+
+}
+
+
+.giftName {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.giftSpec {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.giftPrice {
+  font-size: 1rem;
+}
+
+.giftLink {
+  display: inline-block;
+  background-color: #4caf50;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #388e3c;
+  }
+}

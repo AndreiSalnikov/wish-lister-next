@@ -3,4 +3,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  &__links {
+    display: flex;
+    list-style: none;
+  }
+
+  &__link {
+    display: block;
+    text-decoration: none;
+    margin-right: 20px;
+    color: #000;
+
+  }
+
+  .header__links li:last-child .header__link {
+  margin-right: 0;
+}
+
 }

@@ -1,0 +1,37 @@
+.list {
+  padding: 20px;
+  display: flex;
+  border: 1px solid #000;
+  margin-bottom: 30px;
+
+  &__close {
+    cursor: pointer;
+    height: 20px;
+  }
+
+  &__box {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 30px;
+  }
+
+  &__title {
+    margin: 0 auto 20px;
+  }
+
+  &__text {
+    margin: 0;
+  }
+
+  &__date {
+
+  }
+
+  &__img {
+    object-fit: cover;
+    min-width: 200px;
+    min-height: 200px;
+  }
+
+}
