@@ -3,7 +3,7 @@ import {withAuth} from "@/hoc/ProtectedRoute";
 import {mainApi} from "@/utils/MainApi";
 import PopupCreateList from "@/components/PopupCreateList/PopupCreateList";
 import List from "@/components/List/List";
-
+import styles from './index.module.scss'
 const Lists = () => {
   const [isCreateButtonClicked, setIsCreateButtonClicked] = useState(false);
   const [lists, setLists] = useState([])
@@ -18,9 +18,9 @@ const Lists = () => {
   }, []);
 
   return (
-    <>
-      <h1>Ваши листы с подарками</h1>
-      <section className={{/*styles.cards*/}}>
+    <div className={styles.lists}>
+      <h1 className={styles.lists__title}>Ваши листы с подарками</h1>
+      <section>
         {lists.map((list) => (
           <List
             setLists={setLists}
@@ -33,7 +33,7 @@ const Lists = () => {
       <PopupCreateList setLists={setLists} lists={lists}
         isCreateButtonClicked={isCreateButtonClicked}
                        setIsCreateButtonClicked={setIsCreateButtonClicked}/>
-    </>
+    </div>
   );
 };
 

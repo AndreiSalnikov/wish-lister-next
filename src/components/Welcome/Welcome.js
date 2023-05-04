@@ -10,7 +10,9 @@ const Welcome = () => {
   const router = useRouter();
 
   return (
-    <section className={styles.welcome}>
+    <>
+    <div className={styles.welcome}></div>
+    <section className={styles.welcome__section}>
       <PopupRegisterLogin popupIsOpen={popupIsOpen} setPopupIsOpen={setPopupIsOpen}/>
       <h1 className={styles.welcome__title}>Создайте свой идеальный список подарков</h1>
       <h2 className={styles.welcome__subtitle}>Будь то день рождения, свадьба или праздник — мы поможем!</h2>
@@ -18,6 +20,7 @@ const Welcome = () => {
         user ? router.push('/lists') : setPopupIsOpen(!popupIsOpen)
       }}>Создать свой первый список</span>
     </section>
+      </>
   );
 };
 

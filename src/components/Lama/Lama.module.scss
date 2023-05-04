@@ -1,0 +1,85 @@
+.lama {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__title {
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    margin: 20px 0;
+  }
+
+  &__img {
+    max-height: 150px;
+  }
+
+  &__position_1 {
+    position: absolute;
+    top: 28px;
+    left: -21px;
+  }
+
+  &__position_2 {
+    position: absolute;
+    top: 20px;
+    left: 21px;
+  }
+
+  &__position_3 {
+    position: absolute;
+    top: 77px;
+    left: 7px;
+  }
+
+  &__position_4 {
+    position: absolute;
+    top: 88px;
+    left: -33px;
+  }
+
+  &__position_5 {
+    position: absolute;
+    top: 104px;
+    left: 9px;
+    transform: rotate(45deg);
+  }
+
+    &__position_6 {
+    position: absolute;
+    top: 28px;
+    right: -18px;
+    transform: rotate(193deg);
+  }
+
+    &__position_7 {
+    position: absolute;
+    top: 20px;
+    right: 9px;
+    transform: rotate(45deg);
+  }
+
+    &__position_8 {
+    position: absolute;
+    top: 77px;
+    right: 9px;
+    transform: rotate(45deg);
+  }
+
+    &__position_9 {
+    position: absolute;
+    top: 88px;
+    right: -33px;
+    transform: rotate(45deg);
+  }
+
+    &__position_10 {
+    position: absolute;
+    top: 104px;
+    right: -1px;
+    transform: rotate(45deg);
+  }
+}

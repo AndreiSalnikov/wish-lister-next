@@ -54,6 +54,13 @@ class Api {
     return fetch(url, options).then(this._checkResponse);
   }
 
+  logout() {
+    return this._request(`${this._url}/logout`, {
+      credentials: 'include',
+      headers: this._headers
+    })
+  }
+
   getMe(path) {
     return this._request(`${this._url}${path}`, {
       credentials: 'include',

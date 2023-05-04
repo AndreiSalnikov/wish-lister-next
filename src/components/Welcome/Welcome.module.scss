@@ -1,14 +1,18 @@
 .welcome {
-  background-position: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 100%;
-  height: 900px;
-  background-image: url("../../images/welcome/welcomeBackground.webp");
+  background-color: #fff;
+
+  &__section {
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 900px;
+    background-image: url("../../images/welcome/welcomeBackground.webp");
+  }
 
   &__title {
     text-align: center;

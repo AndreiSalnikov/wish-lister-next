@@ -8,7 +8,7 @@ import {updateUser} from "@/store/actions/user";
 
 const PopupRegisterLogin = ({popupIsOpen, setPopupIsOpen}) => {
   const [isEmailRegisterClicked, setIsEmailRegisterClicked] = useState(false)
-  const [isReminderActive, setIsReminderActive] = useState(false)
+  const [isReminderActive, setIsReminderActive] = useState(true)
   const [isLoginButtonClicked, setIsLoginButtonClicked] = useState(false)
   const [errorRegistration, setErrorRegistration] = useState("");
   const [loadButton, setLoadButton] = useState(false);
@@ -34,6 +34,7 @@ const PopupRegisterLogin = ({popupIsOpen, setPopupIsOpen}) => {
     try {
       await mainApi.register(data.name, data.email, data.password, isReminderActive);
       await mainApi.login(data.email, data.password);
+      setPopupIsOpen(false)
       // const userData = await mainApi.getMe('/users/me');
       //const {token} = await mainApi.login(email, password);
       //mainApi.setToken(token);
@@ -61,8 +62,8 @@ const PopupRegisterLogin = ({popupIsOpen, setPopupIsOpen}) => {
       await mainApi.login(data.email, data.password);
       const userData = await mainApi.getMe('/users/me');
       dispatch(updateUser(userData));
+      setPopupIsOpen(false)
 
-      // setUser(userData);
       if (router.pathname === '/') {
         await router.push('/lists')
       } else {
@@ -310,8 +311,8 @@ const PopupRegisterLogin = ({popupIsOpen, setPopupIsOpen}) => {
 
         {!isLoginButtonClicked &&
           <div className={styles.popupRegisterLogin__reminder}>
-            <input className={styles.popupRegisterLogin__reminderCheckbox} type={"checkbox"}
-                   onClick={() => setIsReminderActive(!isReminderActive)}/>
+            <input className={styles.popupRegisterLogin__reminderCheckbox} type={"checkbox"} checked={isReminderActive}
+                   onChange={() => setIsReminderActive(!isReminderActive)}/>
             <label className={styles.popupRegisterLogin__reminderText}>Получать уведомления о подарках и мероприятиях на
               почту</label>
           </div>

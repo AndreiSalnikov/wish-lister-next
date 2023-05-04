@@ -10,7 +10,8 @@ const List = ({list, setLists}) => {
     router.push(`${router.pathname}/${list._id}`)
   }
 
-  const deleteList = async () => {
+  const deleteList = async (e) => {
+    e.stopPropagation();
     try {
       await mainApi.deleteList(list._id)
       setLists((state) => state.filter((l) => {
@@ -22,11 +23,11 @@ const List = ({list, setLists}) => {
   }
 
   return (
-    <div className={styles.list}>
+    <div className={styles.list} onClick={openList}>
       <Image className={styles.list__img} src={list.image} width={200} height={200} alt='картинка'/>
       <div className={styles.list__box}>
         <div>
-          <h2 className={styles.list__title} onClick={openList}>{list.title}</h2>
+          <h2 className={styles.list__title} >{list.title}</h2>
           <p className={styles.list__date}>{list.date}</p>
           <p className={styles.list__text}>{list.description === ' ' ? 'Описание отсустствует' : list.description}</p>
         </div>
