@@ -15,7 +15,7 @@ export const withAuth = (WrappedComponent) => {
       // Fetch the user if it hasn't been fetched yet
       if (!user) {
         mainApi
-          .getMe("/users/me")
+          .getMe()
           .then((data) => dispatch(updateUser(data)))
           .catch((err) => console.error(err))
           .finally(() => setIsLoading(false));

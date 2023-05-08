@@ -1,9 +1,8 @@
 import {useForm} from "react-hook-form";
-
-// import {useAuth} from "./useAuth";
+import {useSelector} from "react-redux";
 
 export function useFormValidation(values) {
-  // const {user} = useAuth();
+  const {user} = useSelector(state => state.user)
   const {
     getValues,
     register,
@@ -11,8 +10,12 @@ export function useFormValidation(values) {
     handleSubmit,
   } = useForm({values, mode: "onChange",});
 
-  const validateSearch = {
-    required: 'Нужно ввести ключевое слово',
+  const validateAbout = {
+    required: ' ',
+    validate: {
+      minLength: (value) =>
+        value.length <= 90 || `Текст должен быть не длиннее 90 симв. Длина текста сейчас: ${value.length}`,
+    }
   }
 
   const validateName = {
@@ -20,12 +23,12 @@ export function useFormValidation(values) {
     validate: {
       minLength: (value) =>
         value.length >= 2 || `Текст должен быть не короче 2 симв. Длина текста сейчас: ${value.length}`,
-      // duplicate: (value) => {
-      //   const {email} = getValues()
-      //   if (user !== null && user.email === email) {
-      //     return value !== user.name || 'Имя или mail должны отличаться';
-      //   }
-      // },
+      duplicate: (value) => {
+        const {email, reminder} = getValues()
+        if (user !== null && user.email === email && user.reminder === reminder) {
+          return value !== user.name;
+        }
+      },
     },
     pattern: {
       value: /^[a-яёa-z]+(?:[ -][a-яёa-z]+)*$/i,
@@ -51,10 +54,6 @@ export function useFormValidation(values) {
 
   const validatePassword = {
     required: 'Обязательное поле',
-    validate: {
-      // isUpper: (value) => /[A-Z,А-Я]/.test(value) || 'Пароль должен содержать хотя бы одну заглавную букву',
-      // specialSymbol: (value) => /[!@#$%^&*)(+=.<>{}[\]:;'"|~`_-]/g.test(value) || 'Пароль должен содержать хотя бы 1 специальный символ'
-    },
   };
 
   const confirmPassword = {
@@ -68,6 +67,7 @@ export function useFormValidation(values) {
   };
 
   return {
+    validateAbout,
     confirmPassword,
     register,
     handleSubmit,
@@ -76,6 +76,5 @@ export function useFormValidation(values) {
     validateName,
     validateEmail,
     validatePassword,
-    validateSearch,
   };
 }

@@ -61,8 +61,8 @@ class Api {
     })
   }
 
-  getMe(path) {
-    return this._request(`${this._url}${path}`, {
+  getMe() {
+    return this._request(`${this._url}/user/me`, {
       credentials: 'include',
       headers: this._headers
     })
@@ -87,7 +87,7 @@ class Api {
     })
   }
 
-    reservationOff(giftId, listId) {
+  reservationOff(giftId, listId) {
     return this._request(`${this._url}/lists/${listId}/gifts/${giftId}/reservation`, {
       method: "DELETE",
       credentials: 'include',
@@ -95,6 +95,18 @@ class Api {
     })
   }
 
+  changePassword({currentPassword, newPassword}) {
+    return this._request(`${this._url}/user/password`, {
+      method: "PATCH",
+      credentials: 'include',
+      headers: this._headers,
+      body: JSON.stringify(
+        {
+          currentPassword: currentPassword,
+          newPassword: newPassword,
+        }),
+    })
+  }
 
   createList(title, date, description, image, gifts = []) {
     return this._request(`${this._url}/list`, {
@@ -121,13 +133,27 @@ class Api {
 
   }
 
-  editServerProfileInfo(data) {
-    return this._request(`${this._url}/users/me`, {
-      method: "PATCH", headers: this._headers, body: JSON.stringify({
-        name: data.name, email: data.email,
+  updateUser({name, email, reminder}) {
+    return this._request(`${this._url}/user/me`, {
+      method: "PATCH",
+      credentials: 'include',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name, email: email, reminder: reminder
       })
     })
   };
+
+  updateAbout({about}) {
+    return this._request(`${this._url}/user/about`, {
+      method: "PATCH",
+      credentials: 'include',
+      headers: this._headers,
+      body: JSON.stringify({
+        about: about,
+      })
+    })
+  }
 
   deleteList(id) {
     return this._request(`${this._url}/lists/${id}`, {

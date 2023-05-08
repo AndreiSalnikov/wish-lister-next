@@ -34,25 +34,27 @@ const Gift = ({gift, listId, wishlistOwner}) => {
   return (
     <>
       <PopupRegisterLogin popupIsOpen={popupIsOpen} setPopupIsOpen={setPopupIsOpen}/>
-      <div className={styles.gift} key={gift._id}>
-        <h3 className={styles.giftName}>{gift.name}</h3>
-        <p className={styles.giftSpec}>{gift.specification}</p>
-        <p className={styles.giftPrice}>Цена: {gift.price}</p>
-        <a href={gift.link} target="_blank" className={styles.giftLink}>
-          Купить
-        </a>
-        <button
-          disabled={gift?.reservation[0] !== user?._id && gift?.reservation[0] !== undefined || user?._id === wishlistOwner}
-          className={
-            isButtonClicked || isReserved > 0 || user?._id === wishlistOwner
-              ? `${styles.reservation} ${styles.reservation_active}`
-              : `${styles.reservation}`
-          }
-          onClick={handleReservation}
-        >
-          {isButtonClicked || isReserved > 0 ? 'Забронировано' : 'Забронировать'}
-        </button>
-      </div>
+
+        <div className={styles.gift} key={gift._id}>
+          <h3 className={styles.giftName}>{gift.name}</h3>
+          <p className={styles.giftSpec}>{gift.specification}</p>
+          <p className={styles.giftPrice}>Цена: {gift.price}</p>
+          <a href={gift.link} target="_blank" className={styles.giftLink}>
+            Купить
+          </a>
+          <button
+            disabled={gift?.reservation[0] !== user?._id && gift?.reservation[0] !== undefined || user?._id === wishlistOwner}
+            className={
+              isButtonClicked || isReserved > 0 || user?._id === wishlistOwner
+                ? `${styles.reservation} ${styles.reservation_active}`
+                : `${styles.reservation}`
+            }
+            onClick={handleReservation}
+          >
+            {isButtonClicked || isReserved > 0 ? 'Забронировано' : 'Забронировать'}
+          </button>
+        </div>
+
     </>
   );
 }

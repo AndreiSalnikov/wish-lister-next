@@ -21,8 +21,8 @@ const Header = () => {
 
   const logout = async () => {
     try {
-      await mainApi.logout()
       dispatch(updateUser(null))
+      await mainApi.logout()
       await router.push('/')
       setIsButtonPressed(!isButtonPressed)
     } catch (error) {
@@ -56,7 +56,6 @@ const Header = () => {
                          src='https://img.freepik.com/premium-vector/cute-business-llama-icon-illustration-alpaca-mascot-cartoon-character-animal-icon-concept-isolated_138676-989.jpg?w=2000'
                          width={22} height={22} alt='аватар'/>
                 </div>
-
                 <div
                   className={isButtonPressed ? `${styles.header__checkmark} ${styles.header__checkmark_active}` : ` ${styles.header__checkmark}`}>
                   <svg xmlns="http://www.w3.org/2000/svg" width='14' height='14' viewBox="0 0 26 26">
@@ -67,7 +66,6 @@ const Header = () => {
                     </g>
                   </svg>
                 </div>
-
               </button>
             </div>
 

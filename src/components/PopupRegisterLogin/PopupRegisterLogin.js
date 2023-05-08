@@ -12,9 +12,7 @@ const PopupRegisterLogin = ({popupIsOpen, setPopupIsOpen}) => {
   const [isLoginButtonClicked, setIsLoginButtonClicked] = useState(false)
   const [errorRegistration, setErrorRegistration] = useState("");
   const [loadButton, setLoadButton] = useState(false);
-  // const [user, setUser] = useState(null)
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user)
   const {
     confirmPassword,
     register,

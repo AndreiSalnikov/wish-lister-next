@@ -3,6 +3,7 @@
   margin: 0 auto;
 
   &__leftbox {
+    max-height: 285px;
     display: flex;
     align-items: center;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -11,12 +12,14 @@
   }
 
   &__rightbox {
-
     margin-left: 30px;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    max-width: 940px;
+    max-width: 605px;
     padding: 30px;
+  }
 
+  &__checkbox {
+    max-width: 13px;
   }
 
   &__edittop {
@@ -59,20 +62,13 @@
 
   &__box {
     padding: 30px;
-  }
-
-  &__imgbox {
     position: relative;
-    display: flex;
-  }
-
-  &__img {
-    border-radius: 50%;
   }
 
   &__dots {
     position: absolute;
-    right: -60px;
+    right: -30px;
+    top: 23px;
     cursor: pointer;
   }
 
@@ -80,7 +76,7 @@
     border: 1px solid rgba(0, 0, 0, 0.2);
     width: 100%;
     min-height: 100px;
-    line-height: 1;
+    outline: none;
 
     &::placeholder {
       text-align: left;
@@ -88,23 +84,146 @@
     }
   }
 
-  &__inputAbout {
+  &__updateButton {
+    max-height: 43px;
+    max-width: 104px;
     margin-top: 10px;
-    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 10px;
-    color: #F675B3;
-    border: 1px solid #F675B3;
-    background-color: rgba(0, 0, 0, 0);
-    transition: opacity 0.3s ease-out;
+    color: #fff;
+    border: none;
+    background-color: #c9c9c9;
 
-    &:hover {
+    //border: 1px solid #F675B3;
+    //background-color: rgba(0, 0, 0, 0);
+    transition: all 0.3s ease-out;
+
+    &_active {
+      background-color: rgb(246, 117, 179);
+    }
+
+
+    &:hover:not(:disabled) {
+      cursor: pointer;
       opacity: 0.7;
     }
 
   }
 
+  &__form {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 45px;
+
+
+    &:first-of-type {
+      margin-bottom: 30px;
+    }
+
+  }
+
+  &__cell {
+    display: flex;
+    flex-direction: column;
+    max-width: 209px;
+  }
+
+  &__text {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  &__imgbox {
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    cursor: pointer;
+
+
+    &:hover {
+      .profile__photoBox {
+        opacity: 0.8;
+        visibility: visible;
+      }
+    }
+
+    &:hover:before {
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      content: "";
+      background-color: rgba(0, 0, 0, 0.2);
+      border-radius: 50%;
+    }
+
+  }
+
+  &__img {
+    border-radius: 50%;
+    position: relative;
+  }
+
+  &__photo {
+    z-index: 2;
+    position: relative;
+    top: 2px;
+    left: 2px;
+  }
+
+  &__photoBox {
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    border-radius: 50%;
+    top: 33px;
+    left: 31px;
+    width: 28px;
+    height: 28px;
+    background-color: #fff;
+    transition: all .3s ease-out;
+  }
+
+  &__error {
+    display: block;
+    margin-bottom: 5px;
+    color: red;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 15px;
+    max-width: 230px;
+    min-height: 30px;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+
+    &_active {
+      opacity: 1;
+    }
+
+  }
+
+  &__errorSubmit {
+    opacity: 0;
+    visibility: hidden;
+    color: red;
+    min-height: 18px;
+    transition: all .3s ease-out;
+
+    &_active {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
 
 }
+
