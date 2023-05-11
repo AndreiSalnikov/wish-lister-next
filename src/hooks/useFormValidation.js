@@ -2,8 +2,12 @@ import {useForm} from "react-hook-form";
 import {useSelector} from "react-redux";
 
 export function useFormValidation(values) {
+
   const {user} = useSelector(state => state.user)
   const {
+    control,
+    setValue,
+    reset,
     getValues,
     register,
     formState: {errors, isValid},
@@ -16,6 +20,23 @@ export function useFormValidation(values) {
       minLength: (value) =>
         value.length <= 90 || `Текст должен быть не длиннее 90 симв. Длина текста сейчас: ${value.length}`,
     }
+  }
+
+  const validateCreate = {
+    required: 'Обязательное поле',
+    validate: {
+      minLength: (value) =>
+        value.length >= 2 || `Текст должен быть не короче 2 симв. Длина текста сейчас: ${value.length}`,
+    }
+  }
+
+
+  const validateLink = {
+    required: 'Обязательное поле',
+    pattern: {
+      value: /^https?:\/\/.+(\.jpg|\.jpeg|\.png|\.gif)$/i,
+      message: 'Поле должно содержать ссылку на изображение и начинаться с http:// или https://',
+    },
   }
 
   const validateName = {
@@ -52,9 +73,18 @@ export function useFormValidation(values) {
     // },
   };
 
-  const validatePassword = {
+  const validateRequired = {
     required: 'Обязательное поле',
   };
+
+  const validateDate = {
+    required: "Дата обязательна для заполнения",
+    pattern: {
+      value: /^\d{2}\/\d{2}\/\d{4}$/,
+      message: "Дата должна быть в формате дд/мм/гггг"
+    }
+  };
+
 
   const confirmPassword = {
     required: 'Обязательное поле',
@@ -67,14 +97,21 @@ export function useFormValidation(values) {
   };
 
   return {
+    validateDate,
+    validateCreate,
+    setValue,
+    validateRequired,
+    reset,
+    validateLink,
     validateAbout,
     confirmPassword,
     register,
     handleSubmit,
     errors,
     isValid,
+    control,
     validateName,
     validateEmail,
-    validatePassword,
+    validatePassword: validateRequired,
   };
 }

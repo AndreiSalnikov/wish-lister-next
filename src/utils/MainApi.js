@@ -155,6 +155,17 @@ class Api {
     })
   }
 
+  updateAvatar({avatar}) {
+    return this._request(`${this._url}/user/avatar`, {
+      method: "PATCH",
+      credentials: 'include',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: avatar,
+      })
+    })
+  }
+
   deleteList(id) {
     return this._request(`${this._url}/lists/${id}`, {
       method: "DELETE",

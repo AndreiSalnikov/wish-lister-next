@@ -6,8 +6,8 @@ import styles from "./index.module.scss"
 import Image from "next/image";
 import {mainApi} from "@/utils/MainApi";
 import {updateUser} from "@/store/actions/user";
-import PopupError from "@/components/PopupError/PopupError";
 import Preloader from "@/components/Preloader/Preloader";
+import PopupEditAvatar from "@/components/PopupEditAvatar/PopupEditAvatar";
 
 
 const Profile = () => {
@@ -29,7 +29,6 @@ const Profile = () => {
 
   function changeAvatar() {
     setIsPopupOpen(true)
-    alert('Кук')
   }
 
   function FormPassword() {
@@ -237,13 +236,14 @@ const Profile = () => {
 
   return (
     <>
+      <PopupEditAvatar isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen} />
       {isLoading && <Preloader/>}
       <div className={styles.profile}>
         <div className={styles.profile__leftbox}>
           <div className={styles.profile__box}>
             <div className={styles.profile__imgbox} onClick={changeAvatar}>
               <Image className={styles.profile__img}
-                     src='https://img.freepik.com/premium-vector/cute-business-llama-icon-illustration-alpaca-mascot-cartoon-character-animal-icon-concept-isolated_138676-989.jpg?w=2000'
+                     src={user.avatar}
                      width={90} height={90} alt='аватар'/>
               <div className={styles.profile__photoBox}>
                 <svg className={styles.profile__photo} viewBox="0 0 24 24" fill="currentColor" width="24" height="24">

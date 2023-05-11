@@ -5,9 +5,8 @@ import PopupCreateList from "@/components/PopupCreateList/PopupCreateList";
 import List from "@/components/List/List";
 import styles from './index.module.scss'
 const Lists = () => {
-  const [isCreateButtonClicked, setIsCreateButtonClicked] = useState(false);
   const [lists, setLists] = useState([])
-
+  const [isPopupOpen, setIsPopupOpen] = useState(false)
   useEffect(() => {
     // Fetch the user if it hasn't been fetched yet
     mainApi
@@ -29,10 +28,8 @@ const Lists = () => {
           />))}
       </section>
 
-      <button onClick={() => setIsCreateButtonClicked(true)}>Создать</button>
-      <PopupCreateList setLists={setLists} lists={lists}
-        isCreateButtonClicked={isCreateButtonClicked}
-                       setIsCreateButtonClicked={setIsCreateButtonClicked}/>
+      <button onClick={() => setIsPopupOpen(true)}>Создать</button>
+      <PopupCreateList isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen} setLists={setLists} lists={lists}/>
     </div>
   );
 };

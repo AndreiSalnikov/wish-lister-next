@@ -53,8 +53,8 @@ const Header = () => {
               <button className={styles.header__button} onClick={handlePressNav}>
                 <div className={styles.header__avatarbox}>
                   <Image className={styles.header__avatar}
-                         src='https://img.freepik.com/premium-vector/cute-business-llama-icon-illustration-alpaca-mascot-cartoon-character-animal-icon-concept-isolated_138676-989.jpg?w=2000'
-                         width={22} height={22} alt='аватар'/>
+                         src={user.avatar}
+                         width={30} height={30} alt='аватар'/>
                 </div>
                 <div
                   className={isButtonPressed ? `${styles.header__checkmark} ${styles.header__checkmark_active}` : ` ${styles.header__checkmark}`}>

@@ -45,10 +45,12 @@
   &__avatar {
     border-radius: 50%;
     //padding: 0 7px 0 7px;
-    height: 100%;
-    width: 100%;
-    //width: 22px;
-    //height: 22px;
+    //height: 100%;
+    //width: 100%;
+    ////width: 22px;
+    ////height: 22px;
+    max-width: 100%;
+    max-height: 100%;
     object-fit: cover;
   }
 

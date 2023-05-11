@@ -5,6 +5,7 @@ import {mainApi} from "@/utils/MainApi";
 import {useRouter} from "next/router";
 
 const List = ({list, setLists}) => {
+  const date = new Date(list.date).toLocaleDateString('en-GB', {timeZone: 'Europe/Moscow'});
   const router = useRouter()
   const openList = () => {
     router.push(`${router.pathname}/${list._id}`)
@@ -27,8 +28,8 @@ const List = ({list, setLists}) => {
       <Image className={styles.list__img} src={list.image} width={200} height={200} alt='картинка'/>
       <div className={styles.list__box}>
         <div>
-          <h2 className={styles.list__title} >{list.title}</h2>
-          <p className={styles.list__date}>{list.date}</p>
+          <h2 className={styles.list__title}>{list.title}</h2>
+          <p className={styles.list__date}>{date}</p>
           <p className={styles.list__text}>{list.description === ' ' ? 'Описание отсустствует' : list.description}</p>
         </div>
         <svg className={styles.list__close} onClick={deleteList} xmlns="http://www.w3.org/2000/svg" width="16"
