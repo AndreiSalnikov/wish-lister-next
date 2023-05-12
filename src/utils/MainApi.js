@@ -79,6 +79,13 @@ class Api {
     return fetch(`${this._url}/lists/${id}`)
   }
 
+  getListForEdit(id) {
+    return this._request(`${this._url}/lists/edit/${id}`, {
+      credentials: 'include',
+      headers: this._headers,
+    })
+  }
+
   reservationOn(giftId, listId) {
     return this._request(`${this._url}/lists/${listId}/gifts/${giftId}/reservation`, {
       method: "PUT",
@@ -121,6 +128,36 @@ class Api {
           description: description ? description : ' ',
           image: image ? image : 'https://static.mk.ru/upload/entities/2021/09/24/03/articles/detailPicture/ad/f0/3b/f8/aa1602c4e8a45f36cfdacc8b1b045625.jpg'
         }),
+    })
+  }
+
+  updateList({title, description, image, date}, listId) {
+    return this._request(`${this._url}/lists/${listId}`, {
+      method: "PATCH",
+      credentials: 'include',
+      headers: this._headers,
+      body: JSON.stringify({
+        title: title, description: description, image: image, date: date
+      })
+    })
+  }
+
+  addGift({name, price, link, specification}, listId) {
+    const requestBody = {
+      name: name,
+      price: price,
+      link: link,
+    };
+    if (specification) {
+      requestBody.specification = specification;
+    }
+    return this._request(`${this._url}/lists/${listId}`, {
+      method: "PATCH",
+      credentials: 'include',
+      headers: this._headers,
+      body: JSON.stringify(
+        requestBody
+      )
     })
   }
 
@@ -168,6 +205,14 @@ class Api {
 
   deleteList(id) {
     return this._request(`${this._url}/lists/${id}`, {
+      method: "DELETE",
+      credentials: 'include',
+      headers: this._headers,
+    })
+  }
+
+  deleteGift(listId, giftId) {
+    return this._request(`${this._url}/lists/${listId}/gifts/${giftId}`, {
       method: "DELETE",
       credentials: 'include',
       headers: this._headers,

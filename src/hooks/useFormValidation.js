@@ -30,12 +30,34 @@ export function useFormValidation(values) {
     }
   }
 
+  const validatePrice = {
+    required: 'Обязательное поле',
+    validate: {
+      isNumber: (value) => /^\d+$/.test(value) || 'Введите число',
+    }
+  }
+
 
   const validateLink = {
     required: 'Обязательное поле',
     pattern: {
       value: /^https?:\/\/.+(\.jpg|\.jpeg|\.png|\.gif)$/i,
       message: 'Поле должно содержать ссылку на изображение и начинаться с http:// или https://',
+    },
+  }
+
+  const validateLinkCreateList = {
+    pattern: {
+      value: /^https?:\/\/.+(\.jpg|\.jpeg|\.png|\.gif)$/i,
+      message: 'Поле должно содержать ссылку на изображение и начинаться с http:// или https://',
+    },
+  }
+
+  const validateLinkAddGift = {
+    required: 'Обязательное поле',
+    pattern: {
+      value: /^https?:\/\//i,
+      message: 'Поле должно содержать ссылку и начинаться с http:// или https://',
     },
   }
 
@@ -97,6 +119,9 @@ export function useFormValidation(values) {
   };
 
   return {
+    validateLinkAddGift,
+    validatePrice,
+    validateLinkCreateList,
     validateDate,
     validateCreate,
     setValue,

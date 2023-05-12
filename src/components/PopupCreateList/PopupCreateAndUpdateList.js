@@ -7,13 +7,14 @@ import Preloader from "@/components/Preloader/Preloader";
 import DatePicker, {registerLocale} from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import ru from 'date-fns/locale/ru';
+import {useRouter} from "next/router";
 
 registerLocale('ru', ru)
 
-const PopupCreateList = ({lists, setLists, isPopupOpen, setIsPopupOpen}) => {
+const PopupCreateAndUpdateList = ({list, setList, lists, setLists, isPopupOpen, setIsPopupOpen}) => {
   const [isErrorSubmit, setIsErrorSubmit] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
+  const router = useRouter();
   const DateInput = ({control, name, rules, classname}) => {
     return (
       <Controller
@@ -52,23 +53,41 @@ const PopupCreateList = ({lists, setLists, isPopupOpen, setIsPopupOpen}) => {
         }*/
     // setLoadButton(true);
     // setErrorRegistration("");
-    try {
-      setIsLoading(true)
-      const newList = await mainApi.createList(data.title, data.date, data.description, data.image);
-      setIsLoading(false)
-      setIsPopupOpen(false)
-      setLists([...lists, newList])
-      reset()
-      setValue('date', '');
-    } catch (err) {
-      setIsErrorSubmit(err)
-      setIsLoading(false)
-      console.error(err.message);
+    if (router.pathname === '/lists') {
+      try {
+        setIsLoading(true)
+        const newList = await mainApi.createList(data.title, data.date, data.description, data.image);
+        setIsLoading(false)
+        setIsPopupOpen(false)
+        setLists([...lists, newList])
+        reset()
+        setValue('date', '');
+      } catch (err) {
+        setIsErrorSubmit(err)
+        setIsLoading(false)
+        console.error(err.message);
+      }
+    } else {
+      try {
+        setIsLoading(true)
+        const updateList = await mainApi.updateList(data,list._id);
+        setList(updateList)
+        setIsLoading(false)
+        setIsPopupOpen(false)
+        //    setLists([...lists, newList])
+        reset()
+        setValue('date', '');
+      } catch (err) {
+        setIsErrorSubmit(err)
+        setIsLoading(false)
+        console.error(err.message);
+      }
     }
+
   };
 
   const {
-    validateLink,
+    validateLinkCreateList,
     control,
     validateDate,
     validateCreate,
@@ -78,7 +97,12 @@ const PopupCreateList = ({lists, setLists, isPopupOpen, setIsPopupOpen}) => {
     handleSubmit,
     errors,
     isValid,
-  } = useFormValidation();
+  } = useFormValidation({
+    title: list?.title,
+   // date: wishlist?.date,
+    image: list?.image,
+    description: list?.description
+  });
 
   //доп поля
 
@@ -117,12 +141,14 @@ const PopupCreateList = ({lists, setLists, isPopupOpen, setIsPopupOpen}) => {
       <div className={styles.list__container}>
         <button className={styles.list__close} onClick={() => {
           reset()
-          setValue('date', '');
+          if (!list) {
+            setValue('date', '');
+          }
           setIsPopupOpen(!isPopupOpen)
         }
 
         }></button>
-        <h3 className={styles.list__title}>Создать список</h3>
+        <h3 className={styles.list__title}>{list ? 'Обновить список' : 'Создать список'}</h3>
         <form className={styles.list__form}
               onSubmit={handleSubmit(onSubmit)}>
           <input className={styles.list__input} placeholder='Название' required {...register('title', validateCreate)}/>
@@ -145,7 +171,8 @@ const PopupCreateList = ({lists, setLists, isPopupOpen, setIsPopupOpen}) => {
             className={errors.description ? `${styles.list__error} ${styles.list__error_active}` :
               `${styles.list__error}`}>{errors?.description?.message || ""}
              </span>
-          <input className={styles.list__input} placeholder='Ссылка на картинку' {...register('image',validateLink)}/>
+          <input className={styles.list__input}
+                 placeholder='Ссылка на картинку' {...register('image', validateLinkCreateList)}/>
           <span
             className={errors.image ? `${styles.list__error} ${styles.list__error_active}` :
               `${styles.list__error}`}>{errors?.image?.message || ""}
@@ -162,7 +189,7 @@ const PopupCreateList = ({lists, setLists, isPopupOpen, setIsPopupOpen}) => {
                   className={!isValid || isLoading ?
                     `${styles.list__updateButton}`
                     : `${styles.list__updateButton}
-                   ${styles.list__updateButton_active}`}>Создать
+                   ${styles.list__updateButton_active}`}>{list ? 'Сохранить' : 'Создать'}
           </button>
         </form>
         <div
@@ -178,4 +205,4 @@ const PopupCreateList = ({lists, setLists, isPopupOpen, setIsPopupOpen}) => {
   );
 };
 
-export default PopupCreateList;
+export default PopupCreateAndUpdateList;

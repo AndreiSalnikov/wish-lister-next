@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {withAuth} from "@/hoc/ProtectedRoute";
 import {mainApi} from "@/utils/MainApi";
-import PopupCreateList from "@/components/PopupCreateList/PopupCreateList";
+import PopupCreateAndUpdateList from "@/components/PopupCreateList/PopupCreateAndUpdateList";
 import List from "@/components/List/List";
 import styles from './index.module.scss'
+
 const Lists = () => {
   const [lists, setLists] = useState([])
   const [isPopupOpen, setIsPopupOpen] = useState(false)
@@ -29,7 +30,8 @@ const Lists = () => {
       </section>
 
       <button onClick={() => setIsPopupOpen(true)}>Создать</button>
-      <PopupCreateList isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen} setLists={setLists} lists={lists}/>
+      <PopupCreateAndUpdateList isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen} setLists={setLists}
+                                lists={lists}/>
     </div>
   );
 };

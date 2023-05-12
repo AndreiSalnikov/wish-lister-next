@@ -8,7 +8,7 @@ const List = ({list, setLists}) => {
   const date = new Date(list.date).toLocaleDateString('en-GB', {timeZone: 'Europe/Moscow'});
   const router = useRouter()
   const openList = () => {
-    router.push(`${router.pathname}/${list._id}`)
+    router.push(`${router.pathname}/edit/${list._id}`)
   }
 
   const deleteList = async (e) => {
