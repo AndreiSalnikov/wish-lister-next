@@ -40,19 +40,6 @@ const PopupCreateAndUpdateList = ({list, setList, lists, setLists, isPopupOpen, 
     e.preventDefault();
     setIsErrorSubmit('')
 
-    /*    const gifts = []
-
-        for (let i = 1; i <= clickCount; i++) {
-          const gift = {
-            name: data[`name${i}`],
-            specification: data[`specification${i}`],
-            price: data[`price${i}`],
-            link: data[`link${i}`],
-          };
-          gifts.push(gift);
-        }*/
-    // setLoadButton(true);
-    // setErrorRegistration("");
     if (router.pathname === '/lists') {
       try {
         setIsLoading(true)
@@ -104,36 +91,6 @@ const PopupCreateAndUpdateList = ({list, setList, lists, setLists, isPopupOpen, 
     description: list?.description
   });
 
-  //доп поля
-
-  /*  const [clickCount, setClickCount] = useState(0);
-
-    const handleButtonClick = () => {
-      setClickCount(clickCount + 1);
-    };
-
-    const handleDeleteClick = () => {
-      setClickCount(clickCount - 1);
-    };*/
-//доп поля
-  /*  const additionalFields = useMemo(() => {
-      return Array.from({length: clickCount}).map((_, index) => (
-        <div key={index}>
-          <h2>Название</h2>
-          <input required {...register(`name${index + 1}`)}/>
-          <h2>Описание</h2>
-          <input {...register(`specification${index + 1}`)}/>
-          <h2>Цена</h2>
-          <input required {...register(`price${index + 1}`)}/>
-          <h2>Ссылка</h2>
-          <input required {...register(`link${index + 1}`)}/>
-          <button type="button" onClick={() => handleDeleteClick(index)}>
-            Delete
-          </button>
-        </div>
-      ));
-    }, [clickCount]);*/
-
   return (
     <div
       className={isPopupOpen ? `${styles.list} ${styles.list_opened}` : `${styles.list}`}>
@@ -177,12 +134,6 @@ const PopupCreateAndUpdateList = ({list, setList, lists, setLists, isPopupOpen, 
             className={errors.image ? `${styles.list__error} ${styles.list__error_active}` :
               `${styles.list__error}`}>{errors?.image?.message || ""}
              </span>
-          {/*{/!*доп поля*!/}*/}
-          {/*/!*{clickCount > 0 &&*!/*/}
-          {/*/!*  additionalFields}*!/*/}
-          {/*/!*<button type="button" onClick={handleButtonClick}>*!/*/}
-          {/*/!*  {clickCount === 0 ? 'Добавить подарок' : `Добавить ещё подарок`}*!/*/}
-          {/*/!*</button>*!/*/}
 
 
           <button disabled={!isValid || isLoading}
@@ -197,11 +148,6 @@ const PopupCreateAndUpdateList = ({list, setList, lists, setLists, isPopupOpen, 
         </div>
       </div>
     </div>
-    // <form>
-    //   {/*<input type="text" name="firstName" />*/}
-    //   {/*<input type="text" name="lastName" />*/}
-
-    // </form>
   );
 };
 

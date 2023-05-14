@@ -132,13 +132,22 @@ class Api {
   }
 
   updateList({title, description, image, date}, listId) {
+    const requestBody = {
+      title: title,
+      date: date,
+    };
+    if (description || description === '') {
+      requestBody.description = description;
+    }
+
+    if (image) {
+      requestBody.image = image;
+    }
     return this._request(`${this._url}/lists/${listId}`, {
       method: "PATCH",
       credentials: 'include',
       headers: this._headers,
-      body: JSON.stringify({
-        title: title, description: description, image: image, date: date
-      })
+      body: JSON.stringify(requestBody)
     })
   }
 
@@ -216,6 +225,25 @@ class Api {
       method: "DELETE",
       credentials: 'include',
       headers: this._headers,
+    })
+  }
+
+  updateGift({name, price, link, specification}, listId, giftId) {
+    const requestBody = {
+      name: name,
+      price: price,
+      link: link,
+    };
+    if (specification || specification === '') {
+      requestBody.specification = specification;
+    }
+    return this._request(`${this._url}/lists/${listId}/gifts/${giftId}`, {
+      method: "PATCH",
+      credentials: 'include',
+      headers: this._headers,
+      body: JSON.stringify(
+        requestBody
+      )
     })
   }
 

@@ -4,7 +4,7 @@ import Preloader from "@/components/Preloader/Preloader";
 import styles from "./PopupAddGift.module.scss"
 import {mainApi} from "@/utils/MainApi";
 
-const PopupAddGift = ({wishlistId,setList, isAddGiftPopupOpen, setIsAddGiftPopupOpen}) => {
+const PopupCreateAndUpdateGift = ({gift, wishlistId, setList, isAddGiftPopupOpen, setIsAddGiftPopupOpen}) => {
   const [isErrorSubmit, setIsErrorSubmit] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const {
@@ -16,24 +16,34 @@ const PopupAddGift = ({wishlistId,setList, isAddGiftPopupOpen, setIsAddGiftPopup
     handleSubmit,
     errors,
     isValid,
-  } = useFormValidation();
+  } = useFormValidation({name: gift?.name, price: gift?.price, link: gift?.link, specification: gift?.specification});
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
     setIsErrorSubmit('')
-    try {
+
+    if (gift) {
       setIsLoading(true)
-      console.log(data)
-      console.log(wishlistId)
-      const updatedList = await mainApi.addGift(data,wishlistId)
-      setList(updatedList)
+      const list = await mainApi.updateGift(data,wishlistId,gift._id);
       setIsLoading(false)
       setIsAddGiftPopupOpen(false)
-      reset()
-    } catch (err) {
-      setIsLoading(false)
-      setIsErrorSubmit(err)
+      console.log(list)
+      setList(list)
+    } else {
+      try {
+        setIsLoading(true)
+        const updatedList = await mainApi.addGift(data, wishlistId)
+        setList(updatedList)
+        setIsLoading(false)
+        setIsAddGiftPopupOpen(false)
+        reset()
+      } catch (err) {
+        setIsLoading(false)
+        setIsErrorSubmit(err)
+      }
     }
+
+
   }
 
   return (
@@ -47,20 +57,23 @@ const PopupAddGift = ({wishlistId,setList, isAddGiftPopupOpen, setIsAddGiftPopup
         }
 
         }></button>
-        <h3 className={styles.add__title}>Добавить подарок</h3>
+        <h3 className={styles.add__title}>{gift ? 'Обновите информацию о подарке' : 'Добавить подарок'}</h3>
         <form className={styles.add__form}
               onSubmit={handleSubmit(onSubmit)}>
-          <input className={styles.add__input} placeholder='Название подарка' required {...register('name',validateCreate)}/>
+          <input className={styles.add__input} placeholder='Название подарка'
+                 required {...register('name', validateCreate)}/>
           <span
             className={errors.name ? `${styles.add__error} ${styles.add__error_active}` :
               `${styles.add__error}`}>{errors?.name?.message || ""}
              </span>
-          <input className={styles.add__input} placeholder='Цена подарка' required {...register('price',validatePrice)}/>
+          <input className={styles.add__input} placeholder='Цена подарка'
+                 required {...register('price', validatePrice)}/>
           <span
             className={errors.price ? `${styles.add__error} ${styles.add__error_active}` :
               `${styles.add__error}`}>{errors?.price?.message || ""}
              </span>
-          <input className={styles.add__input} placeholder='Ссылка на подарок' required {...register('link',validateLinkAddGift)}/>
+          <input className={styles.add__input} placeholder='Ссылка на подарок'
+                 required {...register('link', validateLinkAddGift)}/>
           <span
             className={errors.link ? `${styles.add__error} ${styles.add__error_active}` :
               `${styles.add__error}`}>{errors?.link?.message || ""}
@@ -70,11 +83,11 @@ const PopupAddGift = ({wishlistId,setList, isAddGiftPopupOpen, setIsAddGiftPopup
             className={errors.specification ? `${styles.add__error} ${styles.add__error_active}` :
               `${styles.add__error}`}>{errors?.specification?.message || ""}
              </span>
-                    <button disabled={!isValid || isLoading}
+          <button disabled={!isValid || isLoading}
                   className={!isValid || isLoading ?
                     `${styles.add__updateButton}`
                     : `${styles.add__updateButton}
-                   ${styles.add__updateButton_active}`}>{'Добавить'}
+                   ${styles.add__updateButton_active}`}>{gift ? 'Сохранить' : 'Добавить'}
           </button>
         </form>
         <div
@@ -85,4 +98,4 @@ const PopupAddGift = ({wishlistId,setList, isAddGiftPopupOpen, setIsAddGiftPopup
   );
 };
 
-export default PopupAddGift;
+export default PopupCreateAndUpdateGift;
