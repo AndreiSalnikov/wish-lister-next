@@ -3,14 +3,14 @@ import styles from './PopupRegisterLogin.module.scss'
 import {useFormValidation} from "@/hooks/useFormValidation";
 import {useRouter} from "next/router";
 import {mainApi} from "@/utils/MainApi";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {updateUser} from "@/store/actions/user";
 
 const PopupRegisterLogin = ({popupIsOpen, setPopupIsOpen}) => {
   const [isEmailRegisterClicked, setIsEmailRegisterClicked] = useState(false)
   const [isReminderActive, setIsReminderActive] = useState(true)
   const [isLoginButtonClicked, setIsLoginButtonClicked] = useState(false)
-  const [errorRegistration, setErrorRegistration] = useState("");
+  const [isErrorSubmit, setIsErrorSubmit] = useState("");
   const [loadButton, setLoadButton] = useState(false);
   const dispatch = useDispatch();
   const {
@@ -28,7 +28,7 @@ const PopupRegisterLogin = ({popupIsOpen, setPopupIsOpen}) => {
   const onSubmitRegister = async (data, e) => {
     e.preventDefault();
     setLoadButton(true);
-    setErrorRegistration("");
+    setIsErrorSubmit("");
     try {
       await mainApi.register(data.name, data.email, data.password, isReminderActive);
       await mainApi.login(data.email, data.password);
@@ -41,13 +41,13 @@ const PopupRegisterLogin = ({popupIsOpen, setPopupIsOpen}) => {
       setLoadButton(false);
       if (router.pathname === '/') {
         await router.push('/lists')
-      }  else {
-         await router.push(router.asPath)
+      } else {
+        await router.push(router.asPath)
       }
 
     } catch (err) {
       console.error(err);
-      setErrorRegistration(err.message);
+      setIsErrorSubmit(err.message);
       setLoadButton(false);
     }
   };
@@ -55,7 +55,7 @@ const PopupRegisterLogin = ({popupIsOpen, setPopupIsOpen}) => {
   const onSubmitLogin = async (data, e) => {
     e.preventDefault();
     setLoadButton(true);
-    setErrorRegistration("");
+    setIsErrorSubmit("");
     try {
       await mainApi.login(data.email, data.password);
       const userData = await mainApi.getMe('/users/me');
@@ -70,10 +70,31 @@ const PopupRegisterLogin = ({popupIsOpen, setPopupIsOpen}) => {
 
     } catch (err) {
       console.error(err.message);
-      setErrorRegistration(err.message);
+      setIsErrorSubmit(err.message);
       setLoadButton(false);
     }
   };
+
+  const vkAuth = async () => {
+    try {
+      const vkData = mainApi.loginVk();
+      console.log(vkData)
+    }
+    catch (e) {
+
+    }
+  }
+
+    const tgAuth = async () => {
+    try {
+      const tgData = mainApi.loginTelegram();
+      console.log(tgData)
+    }
+    catch (e) {
+
+    }
+  }
+
 
 
   return (
@@ -145,7 +166,7 @@ const PopupRegisterLogin = ({popupIsOpen, setPopupIsOpen}) => {
                     d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.629-.145-1.241-.205-1.809-.205-2.273 0-3.841.953-2.95 1.119 1.571.293 1.42 3.692 1.054 5.16-.638 2.556-3.036-2.024-4.035-4.305-.241-.548-.315-.974-1.175-.974h-3.255c-.492 0-.787.16-.787.516 0 .602 2.96 6.72 5.786 9.77 2.756 2.975 5.48 2.708 7.376 2.708z"/>
                 </svg>
               </div>
-              <span className={styles.popupRegisterLogin__fbLogin}>Войти через VK</span>
+              <span onClick={vkAuth} className={styles.popupRegisterLogin__fbLogin}>Войти через VK</span>
             </div>
 
             <div className={`${styles.popupRegisterLogin__social} ${styles.popupRegisterLogin__telegram}`}>
@@ -156,7 +177,7 @@ const PopupRegisterLogin = ({popupIsOpen, setPopupIsOpen}) => {
                     d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z"/>
                 </svg>
               </div>
-              <span className={styles.popupRegisterLogin__fbLogin}>Войти через Telegram</span>
+              <span onClick={tgAuth} className={styles.popupRegisterLogin__fbLogin}>Войти через Telegram</span>
             </div>
 
 
@@ -223,6 +244,9 @@ const PopupRegisterLogin = ({popupIsOpen, setPopupIsOpen}) => {
                 className={!isValid || loadButton ? styles.popupRegisterLogin__button : `${styles.popupRegisterLogin__button} ${styles.popupRegisterLogin__button_active}`}>{loadButton ? 'Загрузка...' : 'Зарегистрироваться'}
               </button>
             </form>
+            <div
+              className={isErrorSubmit ? `${styles.popupRegisterLogin__errorSubmit} ${styles.popupRegisterLogin__errorSubmit_active}` : `${styles.popupRegisterLogin__errorSubmit}`}>{isErrorSubmit === 'Такой email уже существует' ? `${isErrorSubmit}` : `Во время выполнения запроса произошла ошибка, попробуйте позднее`}
+            </div>
           </>
 
         }
@@ -257,6 +281,9 @@ const PopupRegisterLogin = ({popupIsOpen, setPopupIsOpen}) => {
                 className={!isValid || loadButton ? styles.popupRegisterLogin__button : `${styles.popupRegisterLogin__button} ${styles.popupRegisterLogin__button_active}`}>{loadButton ? 'Загрузка...' : 'Войти'}
               </button>
             </form>
+            <div
+              className={isErrorSubmit ? `${styles.popupRegisterLogin__errorSubmit} ${styles.popupRegisterLogin__errorSubmit_active}` : `${styles.popupRegisterLogin__errorSubmit}`}>{isErrorSubmit === 'Неправильные почта или пароль' ? `${isErrorSubmit}` : `Во время выполнения запроса произошла ошибка, попробуйте позднее`}
+            </div>
           </>
         }
 

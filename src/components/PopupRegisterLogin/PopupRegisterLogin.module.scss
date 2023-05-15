@@ -250,6 +250,20 @@
 
   }
 
+  &__errorSubmit {
+    max-width: 325px;
+    opacity: 0;
+    visibility: hidden;
+    color: red;
+    min-height: 18px;
+    transition: all .3s ease-out;
+
+    &_active {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
   &__button {
     padding: 14px 0 14px 0;
     margin-bottom: 10px;

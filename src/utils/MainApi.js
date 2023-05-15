@@ -169,16 +169,6 @@ class Api {
       )
     })
   }
-
-  changeStatusMovie(isLiked, movie, idForDelete) {
-    if (isLiked) {
-      return this.setMovieToSave(movie);
-    } else {
-      return this.removeMovieFromSave(idForDelete);
-    }
-
-  }
-
   updateUser({name, email, reminder}) {
     return this._request(`${this._url}/user/me`, {
       method: "PATCH",
@@ -247,29 +237,18 @@ class Api {
     })
   }
 
-  removeMovieFromSave(idForDelete) {
-    return this._request(`${this._url}/movies/${idForDelete}`, {
-      method: "DELETE", headers: this._headers,
+    loginVk() {
+    return this._request(`${this._url}/user/auth/vk`, {
+      headers: this._headers
     })
   };
 
-  setMovieToSave(movie) {
-    return this._request(`${this._url}/movies`, {
-      method: "POST", headers: this._headers, body: JSON.stringify({
-        country: movie.country,
-        director: movie.director,
-        duration: movie.duration,
-        year: movie.year,
-        description: movie.description,
-        image: `${this._imgUrl}${movie.image.url}`,
-        trailerLink: movie.trailerLink,
-        nameRU: movie.nameRU,
-        nameEN: movie.nameEN,
-        thumbnail: `${this._imgUrl}${movie.image.url}`,
-        movieId: movie.id
-      })
+      loginTelegram() {
+    return this._request(`${this._url}/auth/telegram`, {
+      headers: this._headers
     })
-  }
+  };
+
 }
 
 export const mainApi = new Api(settingUserApi)

@@ -21,8 +21,8 @@ const Header = () => {
 
   const logout = async () => {
     try {
-      dispatch(updateUser(null))
       await mainApi.logout()
+      dispatch(updateUser(null))
       await router.push('/')
       setIsButtonPressed(!isButtonPressed)
     } catch (error) {

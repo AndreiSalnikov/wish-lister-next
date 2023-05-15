@@ -15,7 +15,8 @@ const Layout = ({children}) => {
       .getMe("/users/me")
       .then((data) => dispatch(updateUser(data)))
       .catch((err) => console.log(err.message))
-  },[])
+
+  }, [dispatch])
 
 
   return (
