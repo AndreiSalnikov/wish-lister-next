@@ -25,7 +25,7 @@ const Layout = ({children}) => {
         <Header/>
       }
       {children}
-      {(location.pathname !== "/profile" && location.pathname !== "/404") &&
+      {location.pathname === "/" &&
         <Footer/>}
     </>
   );

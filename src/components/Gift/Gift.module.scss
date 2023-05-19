@@ -1,9 +1,33 @@
 .gift {
-  border: 1px solid #000;
-  padding: 1rem;
-  max-width: 255px;
-  max-height: 500px;
-  transition: all .3s ease-out;
+  //border: 1px solid #000;
+  //padding: 1rem;
+  max-width: 300px;
+  //тест
+  &:hover {
+    max-height: 700px;
+  }
+
+  &__box {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+  }
+
+  &__top {
+    display: flex;
+    justify-items: center;
+    justify-content: space-between;
+  }
+
+  &__icon {
+    cursor: pointer;
+    margin-right: 10px;
+    transition: opacity .3s ease-out;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
 }
 
 .reservation {
@@ -42,17 +66,23 @@
 }
 
 .giftSpec {
-  font-size: 1rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   margin-bottom: 0.5rem;
   overflow: hidden;
-  transition: all .3s ease-out;
+  word-break: break-all;
+  min-height: 20px;
+  max-height: 20px;
+  transition: all .7s ease-out;
 
-  //&:hover {
-  //  background-color: red;
-  //  z-index: 99999999999;
-  //  overflow: visible;
-  //}
+  &:hover {
+    max-height: 500px;
+    overflow: visible;
+    text-overflow: unset;
+    white-space: normal;
+  }
 }
+
 
 .giftPrice {
   font-size: 1rem;

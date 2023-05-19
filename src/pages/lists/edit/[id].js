@@ -7,6 +7,8 @@ import {useSelector} from "react-redux";
 import Image from "next/image";
 import PopupCreateAndUpdateGift from "@/components/PopopAddGift/PopupCreateAndUpdateGift";
 import PopupCreateAndUpdateList from "@/components/PopupCreateList/PopupCreateAndUpdateList";
+import Error404Page from "@/pages/404"
+import PopupShare from "@/components/PopupShare/PopupShare";
 
 const EditPage = () => {
   const router = useRouter();
@@ -21,15 +23,20 @@ const EditPage = () => {
   }, [id])
 
   const shareList = () => {
-    router.push(`/lists/${id}`)
+    setIsSharePopupOpen(true)
   }
 
-  // const [isAddButtonClicked, setIsAddButtonClicked] = useState(false)
   const [list, setList] = useState(null)
+  const [isSharePopupOpen, setIsSharePopupOpen] = useState(false)
   const [isAddGiftPopupOpen, setIsAddGiftPopupOpen] = useState(false)
   const [isUpdatePopupOpen, setIsUpdatePopupOpen] = useState(false)
   const date = new Date(list?.date).toLocaleDateString('en-GB', {timeZone: 'Europe/Moscow'});
   const {user} = useSelector((state) => state.user);
+
+  if (!list || list?.owner !== user?._id) {
+    return <Error404Page/>;
+  }
+
   return (
     <div className={styles.container}>
       <PopupCreateAndUpdateGift wishlistId={list?._id} setList={setList} isAddGiftPopupOpen={isAddGiftPopupOpen}
@@ -37,27 +44,32 @@ const EditPage = () => {
       <PopupCreateAndUpdateList setList={setList}
                                 list={list} isPopupOpen={isUpdatePopupOpen}
                                 setIsPopupOpen={setIsUpdatePopupOpen}/>
+      <PopupShare id={id} isPopupOpen={isSharePopupOpen} setIsPopupOpen={setIsSharePopupOpen}/>
       <div className={styles.left}>
         <h1 className={styles.title}>{list?.title}</h1>
         <p className={styles.date}>Дата: {date}</p>
-        <Image width={400} height={300} src={list?.image || 'https://static.mk.ru/upload/entities/2021/09/24/03/articles/detailPicture/ad/f0/3b/f8/aa1602c4e8a45f36cfdacc8b1b045625.jpg'} alt={'картинка'}
+        <Image width={400} height={300}
+               src={list?.image || 'https://static.mk.ru/upload/entities/2021/09/24/03/articles/detailPicture/ad/f0/3b/f8/aa1602c4e8a45f36cfdacc8b1b045625.jpg'}
+               alt={'картинка'}
                className={styles.image}/>
-        <p className={styles.description}>{list?.description}</p>
+        <h2 className={styles.title}>Описание</h2>
+        <p
+          className={styles.description}>{list?.description === ' ' || list?.description === '' ? 'Отсутствует' : list?.description}</p>
         {user?._id === list?.owner &&
           <div>
-            <button className={styles.editButton} onClick={() => setIsUpdatePopupOpen(true)}>Редактировать</button>
-          <button onClick={shareList}>Поделиться</button>
+            <button className={styles.editButton} onClick={() => setIsUpdatePopupOpen(true)}>Редактировать список</button>
+            <button className={styles.editButton} onClick={shareList}>Поделиться</button>
           </div>
         }
       </div>
       <div className={styles.right}>
         {user?._id === list?.owner &&
-          <div className={styles.add}>
-            <button onClick={() => setIsAddGiftPopupOpen(true)}>Добавить подарок</button>
-          </div>}
+
+          <button className={styles.add} onClick={() => setIsAddGiftPopupOpen(true)}>Добавить подарок</button>
+        }
         {list?.gifts?.map((gift) => (
           <Gift
-             setList={setList}
+            setList={setList}
             wishlistOwner={list?.owner}
             listId={list?._id}
             key={gift._id}

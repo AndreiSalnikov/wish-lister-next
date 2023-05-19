@@ -1,7 +1,4 @@
 .welcome {
-  background-color: #fff;
-
-  &__section {
     background-position: center;
     display: flex;
     flex-direction: column;
@@ -11,8 +8,9 @@
     background-size: cover;
     width: 100%;
     height: 900px;
-    background-image: url("../../images/welcome/welcomeBackground.webp");
-  }
+    background-image: url("../../images/welcome/welcomeBackground.jpg");
+
+
 
   &__title {
     text-align: center;

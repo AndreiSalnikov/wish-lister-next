@@ -102,6 +102,31 @@ class Api {
     })
   }
 
+  addGiftReservationUser(giftId,listId) {
+    return this._request(`${this._url}/user/gift`, {
+      method: "PATCH",
+      credentials: 'include',
+      headers: this._headers,
+      body: JSON.stringify(
+        {
+          giftId: giftId,
+          listId: listId,
+        }),
+    })
+  }
+
+  deleteGiftReservationUser(giftId) {
+    return this._request(`${this._url}/user/gift`, {
+      method: "delete",
+      credentials: 'include',
+      headers: this._headers,
+      body: JSON.stringify(
+        {
+          giftId: giftId,
+        }),
+    })
+  }
+
   changePassword({currentPassword, newPassword}) {
     return this._request(`${this._url}/user/password`, {
       method: "PATCH",
@@ -169,6 +194,7 @@ class Api {
       )
     })
   }
+
   updateUser({name, email, reminder}) {
     return this._request(`${this._url}/user/me`, {
       method: "PATCH",
@@ -237,13 +263,13 @@ class Api {
     })
   }
 
-    loginVk() {
+  loginVk() {
     return this._request(`${this._url}/user/auth/vk`, {
       headers: this._headers
     })
   };
 
-      loginTelegram() {
+  loginTelegram() {
     return this._request(`${this._url}/auth/telegram`, {
       headers: this._headers
     })

@@ -1,0 +1,132 @@
+.share {
+  visibility: hidden;
+  opacity: 0;
+  z-index: 99999;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgb(0, 0, 0, .5);
+  transition: visibility 0.3s linear, opacity 0.3s linear;
+
+  &_opened {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &__container {
+    min-height: 280px;
+    //min-height: 591px;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, .15);
+    display: flex;
+    flex-direction: column;
+    max-width: 430px;
+    position: relative;
+  }
+
+  &__close {
+    cursor: pointer;
+    border: none;
+    position: absolute;
+    right: -40px;
+    top: -40px;
+    width: 30px;
+    height: 30px;
+    background: var(--color);
+    --color: tranporent;
+    --thickness: 2px;
+    --offset: 50%;
+    transition: opacity 0.3s ease-out;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: calc(var(--offset) - var(--thickness) / 2);
+      left: 0;
+      right: 0;
+      height: var(--thickness);
+      background: white;
+    }
+
+    &::before {
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      transform: rotate(-45deg);
+    }
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  &__title {
+    margin-top: 20px;
+    font-size: 25px;
+  }
+
+  &__input {
+    margin-bottom: 70px;
+    outline: none;
+    min-width: 320px;
+    color: #000;
+    background: none;
+    border-style: none;
+    border-bottom: 2px solid #ccc;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+
+    &:first-child {
+      margin-top: 15px;
+    }
+  }
+
+  &__updateButton {
+    max-height: 43px;
+    width: 100%;
+    //max-width: 104px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    color: #fff;
+    border: none;
+    background-color: #c9c9c9;
+
+    //border: 1px solid #F675B3;
+    //background-color: rgba(0, 0, 0, 0);
+    transition: all 0.3s ease-out;
+
+    &_active {
+      background-color: rgb(246, 117, 179);
+    }
+
+
+    &:hover:not(:disabled) {
+      cursor: pointer;
+      opacity: 0.7;
+    }
+
+  }
+
+  &__form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    width: 90%;
+    padding: 20px;
+  }
+}

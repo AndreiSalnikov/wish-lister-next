@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head'
 import styles from './index.module.scss'
 import Welcome from "@/components/Welcome/Welcome";
+import AboutUs from "@/components/AboutUs/AboutUs";
 export default function HomePage() {
   return (
     <>
@@ -12,7 +13,8 @@ export default function HomePage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <Welcome></Welcome>
+        <Welcome/>
+        <AboutUs/>
       </main>
     </>
   )

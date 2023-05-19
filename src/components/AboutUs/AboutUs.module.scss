@@ -1,0 +1,25 @@
+.about {
+  display: flex;
+  justify-content: space-between;
+  margin: 115px auto 20px;
+align-items: center;
+  &__box {
+    margin-right: 100px;
+  }
+
+  &__title {
+    text-align: left;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+
+  }
+
+  &__description {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin-left: auto;
+    text-align: justify;
+    max-width: 500px;
+  }
+
+}

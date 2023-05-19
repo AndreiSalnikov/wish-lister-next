@@ -19,7 +19,8 @@ const Lists = () => {
 
   return (
     <div className={styles.lists}>
-      <h1 className={styles.lists__title}>Ваши листы с подарками</h1>
+      <h1 className={styles.lists__title}>Ваши списки с подарками</h1>
+      <button className={styles.lists__button} onClick={() => setIsPopupOpen(true)}></button>
       <section>
         {lists.map((list) => (
           <List
@@ -28,8 +29,6 @@ const Lists = () => {
             key={list._id}
           />))}
       </section>
-
-      <button onClick={() => setIsPopupOpen(true)}>Создать</button>
       <PopupCreateAndUpdateList isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen} setLists={setLists}
                                 lists={lists}/>
     </div>
