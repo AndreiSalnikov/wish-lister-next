@@ -76,8 +76,7 @@ const Header = () => {
                           onClick={() => setIsButtonPressed(false)}>Главная</Link></li>
                 <li><Link className={styles.header__link} href={'/profile'}
                           onClick={() => setIsButtonPressed(false)}>Профиль</Link></li>
-                <li><Link className={styles.header__link} href={'/lists'} onClick={() => setIsButtonPressed(false)}>Списки
-                  подарков</Link></li>
+                <li><Link className={styles.header__link} href={'/lists'} onClick={() => setIsButtonPressed(false)}>Мои списки</Link></li>
                 <li><Link className={styles.header__link} href={'/reservation'} onClick={() => setIsButtonPressed(false)}>Забронированные
                   подарки</Link></li>
                 <li><Link className={styles.header__link} href={'/'} onClick={logout}>Выйти</Link></li>

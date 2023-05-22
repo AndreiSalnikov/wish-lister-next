@@ -1,7 +1,5 @@
 const settingUserApi = {
-  //baseUrl: "https://api.moviessearch.nomoredomains.work",
-  baseUrl: "http://localhost:4200",
-  imgUrl: "https://api.nomoreparties.co",
+  baseUrl: "http://localhost:4200/api",
   headers: {
     'Content-Type': 'application/json'
   }
@@ -10,7 +8,6 @@ const settingUserApi = {
 class Api {
   constructor(config) {
     this._url = config.baseUrl;
-    this._imgUrl = config.imgUrl;
     this._headers = config.headers;
   }
 

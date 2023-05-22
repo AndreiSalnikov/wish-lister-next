@@ -5,6 +5,7 @@ import {mainApi} from "@/utils/MainApi";
 import {updateUser} from "@/store/actions/user";
 
 export const withAuth = (WrappedComponent) => {
+  // eslint-disable-next-line react/display-name
   return (props) => {
     const {user} = useSelector((state) => state.user);
     const dispatch = useDispatch();
