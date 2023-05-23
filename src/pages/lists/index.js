@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {withAuth} from "@/hoc/ProtectedRoute";
 import {mainApi} from "@/utils/MainApi";
 import PopupCreateAndUpdateList from "@/components/PopupCreateList/PopupCreateAndUpdateList";
@@ -9,12 +9,10 @@ const Lists = () => {
   const [lists, setLists] = useState([])
   const [isPopupOpen, setIsPopupOpen] = useState(false)
   useEffect(() => {
-    // Fetch the user if it hasn't been fetched yet
     mainApi
       .getLists()
       .then((data) => setLists(data))
       .catch((err) => console.error(err))
-    // .finally(() => setIsLoading(false));
   }, []);
 
   return (

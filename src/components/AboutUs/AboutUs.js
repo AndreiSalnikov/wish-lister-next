@@ -4,7 +4,10 @@ import Image from "next/image";
 const AboutUs = () => {
   return (
     <section className={styles.about}>
-      <Image src={'/images/aboutUs/aboutUs.jpg'} alt={'праздник'} width={1000} height={600}/>
+      <div className={styles.about__imageBox}>
+        <Image className={styles.about__image} src={'/images/aboutUs/aboutUs.jpg'} alt={'праздник'} width={1000}
+               height={400}/>
+      </div>
       <div className={styles.about__box}>
         <h2 className={styles.about__title}>О нас</h2>
         <p className={styles.about__description}>

@@ -1,5 +1,6 @@
 const settingUserApi = {
-  baseUrl: "https://wish-lister.ru/api",
+  // baseUrl: "https://wish-lister.ru/api",
+  baseUrl: "http://localhost:4200/api",
   headers: {
     'Content-Type': 'application/json'
   }

@@ -1,37 +1,40 @@
 .lists {
+  @media (max-width: 1810px) {
+    padding: 0 30px;
+  }
 
   &__title {
     margin: 0 0 20px 0;
   }
 
-&__button {
-  margin-bottom: 30px;
-  width: 100px;
-  height: 100px;
-  background-color: transparent;
-  border: 1px solid #000;
-  cursor: pointer;
-  transition: opacity 0.3s ease-out;
-  position: relative;
+  &__button {
+    margin-bottom: 30px;
+    width: 100px;
+    height: 100px;
+    background-color: transparent;
+    border: 1px solid #000;
+    cursor: pointer;
+    transition: opacity 0.3s ease-out;
+    position: relative;
 
-  &:hover {
-    opacity: 0.7;
-  }
+    &:hover {
+      opacity: 0.7;
+    }
 
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 20%;
-    height: 2px;
-    background-color: #000;
-    transform: translate(-50%, -50%);
-  }
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20%;
+      height: 2px;
+      background-color: #000;
+      transform: translate(-50%, -50%);
+    }
 
-  &::before {
-    transform: translate(-50%, -50%) rotate(90deg);
+    &::before {
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
   }
-}
 }

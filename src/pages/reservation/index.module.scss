@@ -1,7 +1,40 @@
 .reservation {
   &__gifts {
+    justify-items: center;
+    padding: 1rem;
     display: grid;
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    grid-template-columns: repeat(5,1fr);
+    gap: 1rem;
+
+    //@media (max-width: 1800px) {
+    //  grid-template-columns: repeat(3, 1fr);
+    //}
+
+    @media (max-width: 1500px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 1200px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 972px) {
+      grid-template-columns: repeat(2, 1fr);
+      padding: 0;
+      gap: 3rem;
+    }
+
+    @media (max-width: 648px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+
+  &__title {
+    padding: 0 30px;
+
+    @media (max-width: 360px) {
+      padding: 0 10px;
+    }
   }
 }

@@ -1,4 +1,3 @@
-import React from 'react';
 import Head from 'next/head'
 import styles from './index.module.scss'
 import Welcome from "@/components/Welcome/Welcome";

@@ -1,10 +1,11 @@
 .gift {
   //border: 1px solid #000;
   //padding: 1rem;
-  max-width: 300px;
+  width: 300px;
+  max-height: 223px;
   //тест
   &:hover {
-    max-height: 700px;
+    max-height: 300px;
   }
 
   &__box {

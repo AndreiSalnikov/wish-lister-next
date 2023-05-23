@@ -29,6 +29,11 @@
     flex-direction: column;
     min-width: 430px;
     position: relative;
+
+    @media (max-width: 460px) {
+      max-width: 280px;
+    }
+
   }
 
   &__close {
@@ -44,6 +49,13 @@
     --thickness: 2px;
     --offset: 50%;
     transition: opacity 0.3s ease-out;
+
+    @media (max-width: 560px) {
+      min-height: 20px;
+      min-width: 20px;
+      right: 0;
+      top: -36px;
+    }
 
     &::before,
     &::after {

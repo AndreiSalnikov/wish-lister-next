@@ -57,16 +57,14 @@ const EditPage = () => {
           className={styles.description}>{list?.description === ' ' || list?.description === '' ? 'Отсутствует' : list?.description}</p>
         {user?._id === list?.owner &&
           <div>
-            <button className={styles.editButton} onClick={() => setIsUpdatePopupOpen(true)}>Редактировать список</button>
+            <button className={styles.editButton} onClick={() => setIsUpdatePopupOpen(true)}>Редактировать список
+            </button>
             <button className={styles.editButton} onClick={shareList}>Поделиться</button>
           </div>
         }
       </div>
       <div className={styles.right}>
-        {user?._id === list?.owner &&
 
-          <button className={styles.add} onClick={() => setIsAddGiftPopupOpen(true)}>Добавить подарок</button>
-        }
         {list?.gifts?.map((gift) => (
           <Gift
             setList={setList}
@@ -78,6 +76,10 @@ const EditPage = () => {
         ))
         }
       </div>
+      {user?._id === list?.owner &&
+
+        <button className={styles.add} onClick={() => setIsAddGiftPopupOpen(true)}>Добавить подарок</button>
+      }
     </div>
   );
 };
