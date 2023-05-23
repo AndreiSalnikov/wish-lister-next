@@ -31,7 +31,8 @@
     position: relative;
 
     @media (max-width: 460px) {
-      max-width: 280px;
+      max-width: 300px;
+      min-width: 300px;
     }
 
   }
@@ -87,6 +88,9 @@
     font-weight: 500;
     line-height: 29px;
     margin: 25px auto;
+    @media (max-width: 460px) {
+      font-size: 24px;
+    }
     //max-width: 330px;
   }
 
@@ -193,6 +197,9 @@
     margin: 12px auto 24px;
     text-align: center;
     width: 320px;
+    @media (max-width: 460px) {
+      width: 280px;
+    }
   }
 
   &__orText {
@@ -207,6 +214,11 @@
     display: flex;
     margin: 0 auto;
     max-width: 320px;
+
+    @media (max-width: 460px) {
+      max-width: 280px;
+    }
+
   }
 
   &__reminderCheckbox {
