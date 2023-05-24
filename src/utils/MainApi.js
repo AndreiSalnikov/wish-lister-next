@@ -268,9 +268,12 @@ class Api {
   };
 
   loginMail() {
-    return this._request(`${this._url}/auth/mailru`, {
+    fetch(`${this._url}/auth/mailru`, {
+  method: 'GET',
+});
+/*    return this._request(`${this._url}/auth/mailru`, {
       headers: this._headers
-    })
+    })*/
   };
 
 }

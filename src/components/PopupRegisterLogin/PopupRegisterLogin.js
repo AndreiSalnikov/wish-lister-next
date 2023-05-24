@@ -76,14 +76,10 @@ const PopupRegisterLogin = ({popupIsOpen, setPopupIsOpen}) => {
   };
 
   const vkAuth = async () => {
-    try {
-      const vkData = mainApi.loginVk();
-      console.log(vkData)
-    } catch (e) {
-    }
+    window.open(`https://wish-lister.ru/api/user/auth/vk`, '_blank');
   }
 
-    const mailAuth = async () => {
+  const mailAuth = () => {
     try {
       const mailData = mainApi.loginMail();
       console.log(mailData)
@@ -278,7 +274,8 @@ const PopupRegisterLogin = ({popupIsOpen, setPopupIsOpen}) => {
 
             <div
               className={isLoginButtonClicked ? `${styles.popupRegisterLogin__socialBox} ${styles.popupRegisterLogin__socialBox_indent_margin}` : styles.popupRegisterLogin__socialBox}>
-              <svg className={`${styles.popupRegisterLogin__svgPointer} ${styles.popupRegisterLogin__svgPointer__grey}`} width="22px" height="22px"
+              <svg className={`${styles.popupRegisterLogin__svgPointer} ${styles.popupRegisterLogin__svgPointer__grey}`}
+                   width="22px" height="22px"
                    xmlns="http://www.w3.org/2000/svg"
                    xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 28 28">
                 <defs>
