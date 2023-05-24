@@ -100,6 +100,10 @@
     line-height: 29px;
     margin: 0 auto;
     max-width: 330px;
+    @media (max-width: 460px) {
+      font-size: 18px;
+    }
+
   }
 
   &__span {
@@ -183,6 +187,11 @@
   &__fbLogin {
     color: #fff;
     margin-right: 55px;
+
+    @media (max-width: 460px) {
+      margin-right: 0;
+      font-size: 15px;
+    }
   }
 
   &__email {
@@ -250,6 +259,11 @@
     font-weight: 500;
     line-height: 17px;
     margin-bottom: 6px;
+
+    @media (max-width: 460px) {
+      max-width: 280px;
+      min-width: 280px;
+    }
 
     &:first-child {
       margin-top: 15px;

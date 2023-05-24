@@ -267,8 +267,8 @@ class Api {
     })
   };
 
-  loginTelegram() {
-    return this._request(`${this._url}/auth/telegram`, {
+  loginMail() {
+    return this._request(`${this._url}/auth/mailru`, {
       headers: this._headers
     })
   };
