@@ -43,25 +43,29 @@ const Profile = () => {
     return (
       <>
         <form className={styles.profile__form} onSubmit={handleSubmit(onSubmitPassword)}>
-          <div className={styles.profile__cell}>
-            <label>
-              <span className={styles.profile__text}>Старый пароль</span>
-            </label>
-            <input className={styles.profile__input} required {...register("currentPassword", validatePassword)} type="password"/>
-            <span
-              className={errors.currentPassword ? `${styles.profile__error} ${styles.profile__error_active}` :
-                `${styles.profile__error}`}>{errors?.currentPassword?.message || ""}
+          <div className={styles.profile__top}>
+            <div className={styles.profile__cell}>
+              <label>
+                <span className={styles.profile__text}>Старый пароль</span>
+              </label>
+              <input className={styles.profile__input} required {...register("currentPassword", validatePassword)}
+                     type="password"/>
+              <span
+                className={errors.currentPassword ? `${styles.profile__error} ${styles.profile__error_active}` :
+                  `${styles.profile__error}`}>{errors?.currentPassword?.message || ""}
              </span>
-          </div>
-          <div className={styles.profile__cell}>
-            <label>
-              <span className={styles.profile__text}>Новый пароль</span>
-            </label>
-            <input className={styles.profile__input} required {...register("newPassword", validatePassword)} type="password"/>
-            <span
-              className={errors.newPassword ? `${styles.profile__error} ${styles.profile__error_active}` :
-                `${styles.profile__error}`}>{errors?.newPassword?.message || ""}
+            </div>
+            <div className={styles.profile__cell}>
+              <label>
+                <span className={styles.profile__text}>Новый пароль</span>
+              </label>
+              <input className={styles.profile__input} required {...register("newPassword", validatePassword)}
+                     type="password"/>
+              <span
+                className={errors.newPassword ? `${styles.profile__error} ${styles.profile__error_active}` :
+                  `${styles.profile__error}`}>{errors?.newPassword?.message || ""}
              </span>
+            </div>
           </div>
           <button disabled={!isValid || isLoading}
                   className={!isValid || isLoading ?
@@ -119,7 +123,7 @@ const Profile = () => {
             <label>
               <span className={styles.profile__text}>Уведомления</span>
             </label>
-            <input  className={styles.profile__checkbox} type={"checkbox"} {...register("reminder")}/>
+            <input className={styles.profile__checkbox} type={"checkbox"} {...register("reminder")}/>
           </div>
           <button disabled={!isValid || isLoading}
                   className={!isValid || isLoading ? `${styles.profile__updateButton}` : `${styles.profile__updateButton} ${styles.profile__updateButton_active}`}>
